@@ -4,7 +4,7 @@
   "management_groups": [
     {
       "archetypes": [
-        "root"
+        "root_override"
       ],
       "display_name": "mg-alz-root-prod",
       "exists": false,
@@ -22,7 +22,7 @@
     },
     {
       "archetypes": [
-        "landing_zones"
+        "prd_landing_zones"
       ],
       "display_name": "mg-landing_zones_prd",
       "exists": false,
@@ -127,7 +127,16 @@
       "exists": false,
       "id": "mg-lz-avd-prd",
       "parent_id": "mg-landing_zones_prd"
-    }
+    },
+          {
+        "archetypes": [
+          "prd_security"
+        ],
+        "display_name": "mg-platform-security-prd",
+        "exists": false,
+        "id": "mg-platform-security-prd",
+        "parent_id": "mg-platform-prd"
+      }
   ]
 }
 
