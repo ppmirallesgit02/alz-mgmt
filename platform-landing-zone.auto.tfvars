@@ -54,7 +54,7 @@ custom_replacements = {
     primary_private_dns_zones_enabled                     = true
     primary_private_dns_auto_registration_zone_enabled    = true
     primary_private_dns_resolver_enabled                  = true # This setting currently has no effect, but will be implemented in a future release. To turn off the private DNS resolver, set the `primary_private_dns_zones_enabled` setting to `false`.
-    primary_bastion_enabled                               = true
+    primary_bastion_enabled                               = false
     primary_sidecar_virtual_network_enabled               = true
 
     # Resource names primary connectivity
@@ -65,8 +65,8 @@ custom_replacements = {
     primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
     primary_virtual_network_gateway_vpn_name           = "bdoalz-p-vgw-hub-vpn-$${starter_location_01}"
     primary_private_dns_resolver_name                  = "bdoalz-p-pdr-hub-dns-$${starter_location_01}"
-    primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
-    primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
+    # primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
+    # primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
 
     # Private DNS Zones primary
     primary_auto_registration_zone_name = "$${starter_location_01}.azure.local"
@@ -75,7 +75,7 @@ custom_replacements = {
     # Regional Address Space: 10.0.0.0/16
     primary_hub_address_space                          = "10.0.0.0/22"
     primary_side_car_virtual_network_address_space     = "10.0.4.0/22"
-    primary_bastion_subnet_address_prefix              = "10.0.4.0/26"
+    # primary_bastion_subnet_address_prefix              = "10.0.4.0/26"
     primary_private_dns_resolver_subnet_address_prefix = "10.0.4.64/28"
   }
 
@@ -500,18 +500,18 @@ virtual_wan_virtual_hubs = {
         name    = "$${primary_private_dns_resolver_name}"
       }
     }
-    bastion = {
-      enabled               = "$${primary_bastion_enabled}"
-      subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
-      bastion_host = {
-        name  = "$${primary_bastion_host_name}"
-        zones = "$${starter_location_01_availability_zones}"
-      }
-      bastion_public_ip = {
-        name  = "$${primary_bastion_host_public_ip_name}"
-        zones = "$${starter_location_01_availability_zones}"
-      }
-    }
+    # bastion = {
+    #  enabled               = "$${primary_bastion_enabled}"
+    #  subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
+    #  bastion_host = {
+    #    name  = "$${primary_bastion_host_name}"
+    #    zones = "$${starter_location_01_availability_zones}"
+    #  }
+    #  bastion_public_ip = {
+    #    name  = "$${primary_bastion_host_public_ip_name}"
+    #   zones = "$${starter_location_01_availability_zones}"
+    #  }
+    # }
     side_car_virtual_network = {
       enabled       = "$${primary_sidecar_virtual_network_enabled}"
       name          = "$${primary_sidecar_virtual_network_name}"
