@@ -13,7 +13,7 @@
     },
     {
       "archetypes": [
-        "platform"
+        "platform_override"
       ],
       "display_name": "mg-platform-prd",
       "exists": false,
