@@ -372,13 +372,6 @@ management_group_settings = {
       }
     }
 
-    mg-vendor-mgmt-prd = {
-      policy_assignments = {
-        Enforce-ALZ-Sandbox = {
-          enforcement_mode = "DoNotEnforce"
-        }
-      }
-    }
 
     /*
     # Example of how to update a policy assignment enforcement mode for DDOS Protection Plan
