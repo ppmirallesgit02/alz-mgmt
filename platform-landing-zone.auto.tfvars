@@ -419,7 +419,7 @@ You can use this section to customize the virtual wan networking that will be de
     settings = {
      # enabled = "$${ddos_protection_plan_enabled}"
     }
-  }
+#  }
  # vwan = {
   #  name     = "$${connectivity_hub_vwan_resource_group_name}"
  #   location = "$${starter_location_01}"
