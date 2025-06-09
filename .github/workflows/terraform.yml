@@ -2,26 +2,57 @@ name: Terraform Destroy
 
 on:
   workflow_dispatch:
+    inputs:
+      root_module_folder_relative_path:
+        description: 'Root Module Folder Relative Path'
+        default: '.'
+        type: string
+      terraform_cli_version:
+        description: 'Terraform CLI Version'
+        default: 'latest'
+        type: string
 
 jobs:
   destroy:
-    runs-on: ubuntu-latest
-
+    name: Destroy Terraform Resources
+    runs-on:
+      self-hosted
+    environment: alz-mgmt-plan
+    concurrency: mgmt-tfstate
+    permissions:
+      id-token: write
+      contents: read
     env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-
+      ARM_CLIENT_ID: "${{ vars.AZURE_CLIENT_ID }}"
+      ARM_SUBSCRIPTION_ID: "${{ vars.AZURE_SUBSCRIPTION_ID }}"
+      ARM_TENANT_ID: "${{ vars.AZURE_TENANT_ID }}"
+      ARM_USE_AZUREAD: true
+      ARM_USE_OIDC: true
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Terraform
+      - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: ${{ inputs.terraform_cli_version }}
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          terraform \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          init \
+          -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
+          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
+          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
+          -backend-config="key=terraform.tfstate"
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve -var-file="config/inputs.yaml" -var-file="config/platform-landing-zone.tfvars"
+        run: |
+          terraform \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          destroy \
+          -auto-approve \
+          -var-file="config/inputs.yaml" \
+          -var-file="config/platform-landing-zone.tfvars"
