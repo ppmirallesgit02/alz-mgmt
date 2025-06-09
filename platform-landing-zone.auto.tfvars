@@ -32,7 +32,7 @@ custom_replacements = {
     management_resource_group_name               = "bdoalz-p-rg-management-$${starter_location_01}"
     connectivity_hub_vwan_resource_group_name    = "bdoalz-p-rg-hub-vwan-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "bdoalz-p-rg-hub-$${starter_location_01}"
-    #dns_resource_group_name                      = "bdoalz-p-rg-hub-dns-$${starter_location_01}"
+    dns_resource_group_name                      = "bdoalz-p-rg-hub-dns-$${starter_location_01}"
     #ddos_resource_group_name                     = "bdoalz-p-rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name               = "bdoalz-p-rg-asc-export-$${starter_location_01}"
 
@@ -48,14 +48,14 @@ custom_replacements = {
     ddos_protection_plan_enabled = false
 
     # Resource provisioning primary connectivity
-    #primary_firewall_enabled                              = true
-    #primary_virtual_network_gateway_express_route_enabled = true
-    #primary_virtual_network_gateway_vpn_enabled           = true
-    #primary_private_dns_zones_enabled                     = true
-    #primary_private_dns_auto_registration_zone_enabled    = true
-    #primary_private_dns_resolver_enabled                  = true # This setting currently has no effect, but will be implemented in a future release. To turn off the private DNS resolver, set the `primary_private_dns_zones_enabled` setting to `false`.
+    primary_firewall_enabled                              = false
+    primary_virtual_network_gateway_express_route_enabled = false
+    primary_virtual_network_gateway_vpn_enabled           = false
+    primary_private_dns_zones_enabled                     = false
+    primary_private_dns_auto_registration_zone_enabled    = false
+    primary_private_dns_resolver_enabled                  = false # This setting currently has no effect, but will be implemented in a future release. To turn off the private DNS resolver, set the `primary_private_dns_zones_enabled` setting to `false`.
     #primary_bastion_enabled                               = true
-    #primary_sidecar_virtual_network_enabled               = true
+    primary_sidecar_virtual_network_enabled               = true
 
     # Resource names primary connectivity
     primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
@@ -451,78 +451,78 @@ You can use this section to customize the virtual wan networking that will be de
 #}
 
 #virtual_wan_settings = {
-  name                = "vwan-$${starter_location_01}"
-  resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
-  location            = "$${starter_location_01}"
-  ddos_protection_plan = {
-    enabled             = "$${ddos_protection_plan_enabled}"
-    name                = "$${ddos_protection_plan_name}"
-    resource_group_name = "$${ddos_resource_group_name}"
-    location            = "$${starter_location_01}"
-  }
+#  name                = "vwan-$${starter_location_01}"
+#  resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
+#  location            = "$${starter_location_01}"
+#  ddos_protection_plan = {
+#    enabled             = "$${ddos_protection_plan_enabled}"
+#    name                = "$${ddos_protection_plan_name}"
+#    resource_group_name = "$${ddos_resource_group_name}"
+#    location            = "$${starter_location_01}"
+# }
 #}
 
 #virtual_wan_virtual_hubs = {
-  primary = {
-    hub = {
-      name = "$${primary_hub_name}"
+#  primary = {
+#    hub = {
+#      name = "$${primary_hub_name}"
       /*
       NOTE: We are defaulting to a separate resource group for the hub per best practice for resiliency
       However, there is a known limitation with the portal experience: https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-hubs-be-created-in-different-resource-groups-in-virtual-wan
       If you prefer to use the same resource group as the vwan, then set this to `$${connectivity_hub_vwan_resource_group_name}`
       */
-      resource_group = "$${connectivity_hub_primary_resource_group_name}"
-      location       = "$${starter_location_01}"
-      address_prefix = "$${primary_hub_address_space}"
-    }
-    firewall = {
-      enabled  = "$${primary_firewall_enabled}"
-      name     = "$${primary_firewall_name}"
-      sku_name = "AZFW_Hub"
-      sku_tier = "Standard"
-      zones    = "$${starter_location_01_availability_zones}"
-    }
-    firewall_policy = {
-      name = "$${primary_firewall_policy_name}"
-    }
-    virtual_network_gateways = {
-      express_route = {
-        enabled = "$${primary_virtual_network_gateway_express_route_enabled}"
-        name    = "$${primary_virtual_network_gateway_express_route_name}"
-      }
-      vpn = {
-        enabled = "$${primary_virtual_network_gateway_vpn_enabled}"
-        name    = "$${primary_virtual_network_gateway_vpn_name}"
-      }
-    }
-    private_dns_zones = {
-      enabled                        = "$${primary_private_dns_zones_enabled}"
-      resource_group_name            = "$${dns_resource_group_name}"
-      is_primary                     = true
-      auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
-      auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
-      subnet_address_prefix          = "$${primary_private_dns_resolver_subnet_address_prefix}"
-      private_dns_resolver = {
-        enabled = "$${primary_private_dns_resolver_enabled}"
-        name    = "$${primary_private_dns_resolver_name}"
-      }
-    }
-    bastion = {
-      enabled               = "$${primary_bastion_enabled}"
-      subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
-      bastion_host = {
-        name  = "$${primary_bastion_host_name}"
+#      resource_group = "$${connectivity_hub_primary_resource_group_name}"
+#     location       = "$${starter_location_01}"
+#      address_prefix = "$${primary_hub_address_space}"
+#    }
+#    firewall = {
+#      enabled  = "$${primary_firewall_enabled}"
+#      name     = "$${primary_firewall_name}"
+#      sku_name = "AZFW_Hub"
+#      sku_tier = "Standard"
+#      zones    = "$${starter_location_01_availability_zones}"
+#    }
+#    firewall_policy = {
+#      name = "$${primary_firewall_policy_name}"
+#    }
+#    virtual_network_gateways = {
+#      express_route = {
+#        enabled = "$${primary_virtual_network_gateway_express_route_enabled}"
+#        name    = "$${primary_virtual_network_gateway_express_route_name}"
+#      }
+#      vpn = {
+#        enabled = "$${primary_virtual_network_gateway_vpn_enabled}"
+#        name    = "$${primary_virtual_network_gateway_vpn_name}"
+#      }
+#    }
+#    private_dns_zones = {
+#      enabled                        = "$${primary_private_dns_zones_enabled}"
+#     resource_group_name            = "$${dns_resource_group_name}"
+#      is_primary                     = true
+#      auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
+#      auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
+#      subnet_address_prefix          = "$${primary_private_dns_resolver_subnet_address_prefix}"
+#      private_dns_resolver = {
+#        enabled = "$${primary_private_dns_resolver_enabled}"
+#        name    = "$${primary_private_dns_resolver_name}"
+#      }
+#    }
+#    bastion = {
+#      enabled               = "$${primary_bastion_enabled}"
+#      subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
+#      bastion_host = {
+#        name  = "$${primary_bastion_host_name}"
         /*zones = "$${starter_location_01_availability_zones}"*/
-      }
-      bastion_public_ip = {
-        name  = "$${primary_bastion_host_public_ip_name}"
-        zones = "$${starter_location_01_availability_zones}"
-      }
-    }
-    side_car_virtual_network = {
-      enabled       = "$${primary_sidecar_virtual_network_enabled}"
-      name          = "$${primary_sidecar_virtual_network_name}"
-      address_space = ["$${primary_side_car_virtual_network_address_space}"]
-    }
-  }
+#      }
+#      bastion_public_ip = {
+#        name  = "$${primary_bastion_host_public_ip_name}"
+#        zones = "$${starter_location_01_availability_zones}"
+#      }
+#    }
+#    side_car_virtual_network = {
+#      enabled       = "$${primary_sidecar_virtual_network_enabled}"
+#      name          = "$${primary_sidecar_virtual_network_name}"
+#      address_space = ["$${primary_side_car_virtual_network_address_space}"]
+#    }
+#  }
 #}
