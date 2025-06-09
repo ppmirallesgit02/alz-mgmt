@@ -58,8 +58,8 @@ custom_replacements = {
     #primary_sidecar_virtual_network_enabled               = true
 
     # Resource names primary connectivity
-    #primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
-    #primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
+    primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
+    primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
     #primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
     #primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
     #primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
@@ -73,8 +73,8 @@ custom_replacements = {
 
     # IP Ranges Primary
     # Regional Address Space: 10.0.0.0/16
-    #primary_hub_address_space                          = "10.0.0.0/22"
-    #primary_side_car_virtual_network_address_space     = "10.0.4.0/22"
+    primary_hub_address_space                          = "10.0.0.0/22"
+    primary_side_car_virtual_network_address_space     = "10.0.4.0/22"
     #primary_bastion_subnet_address_prefix              = "10.0.4.0/26"
     #primary_private_dns_resolver_subnet_address_prefix = "10.0.4.64/28"
   }
