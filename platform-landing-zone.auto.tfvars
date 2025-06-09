@@ -32,7 +32,7 @@ custom_replacements = {
     management_resource_group_name               = "bdoalz-p-rg-management-$${starter_location_01}"
     connectivity_hub_vwan_resource_group_name    = "bdoalz-p-rg-hub-vwan-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "bdoalz-p-rg-hub-$${starter_location_01}"
-    dns_resource_group_name                      = "bdoalz-p-rg-hub-dns-$${starter_location_01}"
+    #dns_resource_group_name                      = "bdoalz-p-rg-hub-dns-$${starter_location_01}"
     #ddos_resource_group_name                     = "bdoalz-p-rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name               = "bdoalz-p-rg-asc-export-$${starter_location_01}"
 
@@ -60,13 +60,13 @@ custom_replacements = {
     # Resource names primary connectivity
     primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
     primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
-    primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
-    primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
-    primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
-    primary_virtual_network_gateway_vpn_name           = "bdoalz-p-vgw-hub-vpn-$${starter_location_01}"
-    primary_private_dns_resolver_name                  = "bdoalz-p-pdr-hub-dns-$${starter_location_01}"
-    primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
-    primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
+    #primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
+    #primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
+    #primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
+    #primary_virtual_network_gateway_vpn_name           = "bdoalz-p-vgw-hub-vpn-$${starter_location_01}"
+    #primary_private_dns_resolver_name                  = "bdoalz-p-pdr-hub-dns-$${starter_location_01}"
+    #primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
+    #primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
 
     # Private DNS Zones primary
     #primary_auto_registration_zone_name = "$${starter_location_01}.azure.local"
@@ -410,9 +410,9 @@ management_group_settings = {
 --- Connectivity - Virtual WAN ---
 You can use this section to customize the virtual wan networking that will be deployed.
 */
-connectivity_type = "virtual_wan"
+#connectivity_type = "virtual_wan"
 
-connectivity_resource_groups = {
+#connectivity_resource_groups = {
 #  ddos = {
     name     = "$${ddos_resource_group_name}"
     location = "$${starter_location_01}"
@@ -443,19 +443,19 @@ connectivity_resource_groups = {
  # }
 #}
 
-virtual_wan_settings = {
-name                = "vwan-$${starter_location_01}"
-resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
-location            = "$${starter_location_01}"
+#virtual_wan_settings = {
+#name                = "vwan-$${starter_location_01}"
+#resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
+#location            = "$${starter_location_01}"
 #  ddos_protection_plan = {
 #    enabled             = "$${ddos_protection_plan_enabled}"
 #    name                = "$${ddos_protection_plan_name}"
 #    resource_group_name = "$${ddos_resource_group_name}"
 #    location            = "$${starter_location_01}"
 # }
-}
+#}
 
-virtual_wan_virtual_hubs = {
+#virtual_wan_virtual_hubs = {
   primary = {
     hub = {
       name = "$${primary_hub_name}"
@@ -517,5 +517,5 @@ virtual_wan_virtual_hubs = {
       name          = "$${primary_sidecar_virtual_network_name}"
       address_space = ["$${primary_side_car_virtual_network_address_space}"]
     }
-  }
+#  }
 #}
