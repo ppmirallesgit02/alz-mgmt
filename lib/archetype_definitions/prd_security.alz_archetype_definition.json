@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/main/schemas/archetype_definition.json",
-    "name": "prd_security",
+    "name": "npd_security",
     "policy_assignments": [],
     "policy_definitions": [],
     "policy_set_definitions": [],
