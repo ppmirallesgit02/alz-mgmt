@@ -30,8 +30,8 @@ custom_replacements = {
 
     # Resource group names
     management_resource_group_name               = "bdoalz-p-rg-management-$${starter_location_01}"
-    connectivity_hub_vwan_resource_group_name    = "bdoalz-p-rg-hub-vwan-$${starter_location_01}"
-    connectivity_hub_primary_resource_group_name = "bdoalz-p-rg-hub-$${starter_location_01}"
+    #connectivity_hub_vwan_resource_group_name    = "bdoalz-p-rg-hub-vwan-$${starter_location_01}"
+    #connectivity_hub_primary_resource_group_name = "bdoalz-p-rg-hub-$${starter_location_01}"
     #dns_resource_group_name                      = "bdoalz-p-rg-hub-dns-$${starter_location_01}"
     #ddos_resource_group_name                     = "bdoalz-p-rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name               = "bdoalz-p-rg-asc-export-$${starter_location_01}"
@@ -45,21 +45,21 @@ custom_replacements = {
     dcr_vm_insights_name                    = "bdoalz-p-dcr-vm-insights"
 
     # Resource provisioning global connectivity
-    ddos_protection_plan_enabled = false
+    #ddos_protection_plan_enabled = false
 
     # Resource provisioning primary connectivity
-    primary_firewall_enabled                              = false
-    primary_virtual_network_gateway_express_route_enabled = false
-    primary_virtual_network_gateway_vpn_enabled           = false
-    primary_private_dns_zones_enabled                     = false
-    primary_private_dns_auto_registration_zone_enabled    = false
-    primary_private_dns_resolver_enabled                  = false # This setting currently has no effect, but will be implemented in a future release. To turn off the private DNS resolver, set the `primary_private_dns_zones_enabled` setting to `false`.
+    #primary_firewall_enabled                              = false
+    #primary_virtual_network_gateway_express_route_enabled = false
+    #primary_virtual_network_gateway_vpn_enabled           = false
+    #primary_private_dns_zones_enabled                     = false
+    #primary_private_dns_auto_registration_zone_enabled    = false
+    #primary_private_dns_resolver_enabled                  = false # This setting currently has no effect, but will be implemented in a future release. To turn off the private DNS resolver, set the `primary_private_dns_zones_enabled` setting to `false`.
     #primary_bastion_enabled                               = true
-    primary_sidecar_virtual_network_enabled               = true
+    #primary_sidecar_virtual_network_enabled               = true
 
     # Resource names primary connectivity
-    primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
-    primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
+    #primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
+    #primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
     #primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
     #primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
     #primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
@@ -73,8 +73,8 @@ custom_replacements = {
 
     # IP Ranges Primary
     # Regional Address Space: 10.0.0.0/16
-    primary_hub_address_space                          = "10.0.0.0/22"
-    primary_side_car_virtual_network_address_space     = "10.0.4.0/22"
+    #primary_hub_address_space                          = "10.0.0.0/22"
+    #primary_side_car_virtual_network_address_space     = "10.0.4.0/22"
     #primary_bastion_subnet_address_prefix              = "10.0.4.0/26"
     #primary_private_dns_resolver_subnet_address_prefix = "10.0.4.64/28"
   }
@@ -410,7 +410,7 @@ management_group_settings = {
 --- Connectivity - Virtual WAN ---
 You can use this section to customize the virtual wan networking that will be deployed.
 */
-#connectivity_type = "virtual_wan"
+connectivity_type = "none"
 
 #connectivity_resource_groups = {
 #  ddos = {
@@ -512,10 +512,10 @@ You can use this section to customize the virtual wan networking that will be de
 #        zones = "$${starter_location_01_availability_zones}"
 #      }
 #    }
-    side_car_virtual_network = {
+#    side_car_virtual_network = {
       enabled       = "$${primary_sidecar_virtual_network_enabled}"
       name          = "$${primary_sidecar_virtual_network_name}"
       address_space = ["$${primary_side_car_virtual_network_address_space}"]
-    }
+#    }
 #  }
 #}
