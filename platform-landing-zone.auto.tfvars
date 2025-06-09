@@ -60,13 +60,13 @@ custom_replacements = {
     # Resource names primary connectivity
     primary_hub_name                                   = "bdoalz-p-vwan-hub-$${starter_location_01}"
     primary_sidecar_virtual_network_name               = "bdoalz-p-vnet-sidecar-$${starter_location_01}"
-    #primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
-    #primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
-    #primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
-    #primary_virtual_network_gateway_vpn_name           = "bdoalz-p-vgw-hub-vpn-$${starter_location_01}"
-    #primary_private_dns_resolver_name                  = "bdoalz-p-pdr-hub-dns-$${starter_location_01}"
-    #primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
-    #primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
+    primary_firewall_name                              = "bdoalz-p-fw-hub-$${starter_location_01}"
+    primary_firewall_policy_name                       = "bdoalz-p-fwp-hub-$${starter_location_01}"
+    primary_virtual_network_gateway_express_route_name = "bdoalz-p-vgw-hub-er-$${starter_location_01}"
+    primary_virtual_network_gateway_vpn_name           = "bdoalz-p-vgw-hub-vpn-$${starter_location_01}"
+    primary_private_dns_resolver_name                  = "bdoalz-p-pdr-hub-dns-$${starter_location_01}"
+    primary_bastion_host_name                          = "bdoalz-p-bas-hub-$${starter_location_01}"
+    primary_bastion_host_public_ip_name                = "bdoalz-p-pip-bastion-hub-$${starter_location_01}"
 
     # Private DNS Zones primary
     #primary_auto_registration_zone_name = "$${starter_location_01}.azure.local"
@@ -372,13 +372,6 @@ management_group_settings = {
       }
     }
 
-    mg-vendor-mgmt-prd = {
-      policy_assignments = {
-        Enforce-ALZ-Sandbox = {
-          enforcement_mode = "DoNotEnforce"
-        }
-      }
-    }
 
     /*
     # Example of how to update a policy assignment enforcement mode for DDOS Protection Plan
@@ -417,16 +410,16 @@ management_group_settings = {
 --- Connectivity - Virtual WAN ---
 You can use this section to customize the virtual wan networking that will be deployed.
 */
-#connectivity_type = "virtual_wan"
+connectivity_type = "virtual_wan"
 
-#connectivity_resource_groups = {
-  #ddos = {
-    #name     = "$${ddos_resource_group_name}"
-    #location = "$${starter_location_01}"
-    #settings = {
+connectivity_resource_groups = {
+#  ddos = {
+    name     = "$${ddos_resource_group_name}"
+    location = "$${starter_location_01}"
+    settings = {
      # enabled = "$${ddos_protection_plan_enabled}"
-   # }
- # }
+    }
+  }
  # vwan = {
   #  name     = "$${connectivity_hub_vwan_resource_group_name}"
  #   location = "$${starter_location_01}"
@@ -450,63 +443,63 @@ You can use this section to customize the virtual wan networking that will be de
  # }
 #}
 
-#virtual_wan_settings = {
-#  name                = "vwan-$${starter_location_01}"
-#  resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
-#  location            = "$${starter_location_01}"
+virtual_wan_settings = {
+name                = "vwan-$${starter_location_01}"
+resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
+location            = "$${starter_location_01}"
 #  ddos_protection_plan = {
 #    enabled             = "$${ddos_protection_plan_enabled}"
 #    name                = "$${ddos_protection_plan_name}"
 #    resource_group_name = "$${ddos_resource_group_name}"
 #    location            = "$${starter_location_01}"
 # }
-#}
+}
 
-#virtual_wan_virtual_hubs = {
-#  primary = {
-#    hub = {
-#      name = "$${primary_hub_name}"
+virtual_wan_virtual_hubs = {
+  primary = {
+    hub = {
+      name = "$${primary_hub_name}"
       /*
       NOTE: We are defaulting to a separate resource group for the hub per best practice for resiliency
       However, there is a known limitation with the portal experience: https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-hubs-be-created-in-different-resource-groups-in-virtual-wan
       If you prefer to use the same resource group as the vwan, then set this to `$${connectivity_hub_vwan_resource_group_name}`
       */
-#      resource_group = "$${connectivity_hub_primary_resource_group_name}"
-#     location       = "$${starter_location_01}"
-#      address_prefix = "$${primary_hub_address_space}"
-#    }
-#    firewall = {
-#      enabled  = "$${primary_firewall_enabled}"
-#      name     = "$${primary_firewall_name}"
-#      sku_name = "AZFW_Hub"
-#      sku_tier = "Standard"
-#      zones    = "$${starter_location_01_availability_zones}"
-#    }
-#    firewall_policy = {
-#      name = "$${primary_firewall_policy_name}"
-#    }
-#    virtual_network_gateways = {
-#      express_route = {
-#        enabled = "$${primary_virtual_network_gateway_express_route_enabled}"
-#        name    = "$${primary_virtual_network_gateway_express_route_name}"
-#      }
-#      vpn = {
-#        enabled = "$${primary_virtual_network_gateway_vpn_enabled}"
-#        name    = "$${primary_virtual_network_gateway_vpn_name}"
-#      }
-#    }
+      resource_group = "$${connectivity_hub_primary_resource_group_name}"
+     location       = "$${starter_location_01}"
+      address_prefix = "$${primary_hub_address_space}"
+    }
+    firewall = {
+      enabled  = "$${primary_firewall_enabled}"
+      name     = "$${primary_firewall_name}"
+      sku_name = "AZFW_Hub"
+      sku_tier = "Standard"
+      zones    = "$${starter_location_01_availability_zones}"
+    }
+    firewall_policy = {
+      name = "$${primary_firewall_policy_name}"
+    }
+    virtual_network_gateways = {
+      express_route = {
+        enabled = "$${primary_virtual_network_gateway_express_route_enabled}"
+        name    = "$${primary_virtual_network_gateway_express_route_name}"
+      }
+      vpn = {
+        enabled = "$${primary_virtual_network_gateway_vpn_enabled}"
+        name    = "$${primary_virtual_network_gateway_vpn_name}"
+      }
+    }
 #    private_dns_zones = {
-#      enabled                        = "$${primary_private_dns_zones_enabled}"
-#     resource_group_name            = "$${dns_resource_group_name}"
-#      is_primary                     = true
-#      auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
-#      auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
-#      subnet_address_prefix          = "$${primary_private_dns_resolver_subnet_address_prefix}"
-#      private_dns_resolver = {
-#        enabled = "$${primary_private_dns_resolver_enabled}"
-#        name    = "$${primary_private_dns_resolver_name}"
-#      }
-#    }
+      enabled                        = "$${primary_private_dns_zones_enabled}"
+     resource_group_name            = "$${dns_resource_group_name}"
+      is_primary                     = true
+      auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
+      auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
+      subnet_address_prefix          = "$${primary_private_dns_resolver_subnet_address_prefix}"
+      private_dns_resolver = {
+        enabled = "$${primary_private_dns_resolver_enabled}"
+        name    = "$${primary_private_dns_resolver_name}"
+      }
+    }
 #    bastion = {
 #      enabled               = "$${primary_bastion_enabled}"
 #      subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
@@ -519,10 +512,10 @@ You can use this section to customize the virtual wan networking that will be de
 #        zones = "$${starter_location_01_availability_zones}"
 #      }
 #    }
-#    side_car_virtual_network = {
-#      enabled       = "$${primary_sidecar_virtual_network_enabled}"
-#      name          = "$${primary_sidecar_virtual_network_name}"
-#      address_space = ["$${primary_side_car_virtual_network_address_space}"]
-#    }
-#  }
+    side_car_virtual_network = {
+      enabled       = "$${primary_sidecar_virtual_network_enabled}"
+      name          = "$${primary_sidecar_virtual_network_name}"
+      address_space = ["$${primary_side_car_virtual_network_address_space}"]
+    }
+  }
 #}
