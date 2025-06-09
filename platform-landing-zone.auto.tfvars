@@ -513,9 +513,9 @@ connectivity_type = "none"
 #      }
 #    }
 #    side_car_virtual_network = {
-      enabled       = "$${primary_sidecar_virtual_network_enabled}"
-      name          = "$${primary_sidecar_virtual_network_name}"
-      address_space = ["$${primary_side_car_virtual_network_address_space}"]
+#      enabled       = "$${primary_sidecar_virtual_network_enabled}"
+#      name          = "$${primary_sidecar_virtual_network_name}"
+#      address_space = ["$${primary_side_car_virtual_network_address_space}"]
 #    }
 #  }
 #}
